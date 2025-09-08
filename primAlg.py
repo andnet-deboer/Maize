@@ -18,7 +18,8 @@ def write_maze(maze):
     columns = len(maze[0])
 
     #open a file: 
-    with open('datafile.txt', 'w') as f:
+    filename = input("Please write a filename:")
+    with open('filename', 'w') as f:
         for r in range(rows):
             for c in range(columns):
                 f.write(maze[r][c].__repr__())
