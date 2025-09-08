@@ -11,13 +11,13 @@ class Cell:
     
     def __repr__(self):
         if(self.state == 0):
-            return " ■ "
+            return "2 "
         elif(self.state == 1):
-            return " □ "
+            return "1 "
         elif(self.state == 2):
-            return " B "
+            return "0 "
         elif(self.state == 3):
-            return " E "
+            return "3 "
         else: 
             return " X "
 

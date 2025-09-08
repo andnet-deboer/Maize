@@ -12,6 +12,20 @@ def print_maze(maze):
             print(maze[r][c].__repr__(), end = "")
         print("\n")
 
+def write_maze(maze):
+    #Determine the size of the maze:
+    rows = len(maze)
+    columns = len(maze[0])
+
+    #open a file: 
+    with open('datafile.txt', 'w') as f:
+        for r in range(rows):
+            for c in range(columns):
+                f.write(maze[r][c].__repr__())
+                print(maze[r][c].__repr__(), end = "")
+            print("\n")
+            f.write("\n")
+
 def print_maze_num(maze):
     #Determine the size of the maze:
     rows = len(maze)
@@ -171,7 +185,7 @@ def main():
     maze = prim_alg()
 
     #Print the maze:
-    print_maze(maze)
+    write_maze(maze)
 
     #Export the maze as a .txt file:
     #print_maze_num(maze)
