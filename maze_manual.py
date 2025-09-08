@@ -49,7 +49,7 @@ class Maze():
         cmap = colors.ListedColormap(['green', 'gray', 'black', 'red', 'yellow'])
         norm = colors.BoundaryNorm([0, 1, 2, 3, 4], cmap.N)
 
-        ax = plt.subplots()
+        fig, ax = plt.subplots()
         im = ax.imshow(matrix, cmap=cmap, norm=norm)
 
         ax.set_xticks(np.arange(-0.5, len(self.maze[0]), 1))
