@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal accessed 9/8/25 10:24am
+https://pypi.org/project/colored/ accessed 9/8/25 10:28am

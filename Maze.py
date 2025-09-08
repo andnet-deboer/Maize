@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib as plt
+#from colored import Fore, Back, Style
 
 class Maze():
 
@@ -29,6 +31,12 @@ class Maze():
                 elif cell == 3:
                     self.goal = (i,j)
         
-        return np.array(maze)
+        return maze    
+    def display(self,path):
+        pass
+        
+        
+
     
 myMaze = Maze("maze.txt")
+print(myMaze.maze)
