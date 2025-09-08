@@ -42,14 +42,14 @@ class Maze():
          
     
     def display(self, path,showHistory):
-        os.system('clear')
+        #os.system('clear')
 
         matrix = np.array(self.maze)
 
         cmap = colors.ListedColormap(['green', 'gray', 'black', 'red', 'yellow'])
-        norm = colors.BoundaryNorm([0, 1, 2, 3, 4], cmap.N)
+        norm = colors.BoundaryNorm([0, 1, 2, 3, 4, 5], cmap.N)
 
-        fig, ax = plt.subplots()
+        _, ax = plt.subplots()
         im = ax.imshow(matrix, cmap=cmap, norm=norm)
 
         ax.set_xticks(np.arange(-0.5, len(self.maze[0]), 1))
@@ -60,21 +60,17 @@ class Maze():
         ax.set_title("ROBOT MAIZE")
 
         plt.ion()
-        plt.show()
+        #plt.show()
         plt.draw()
 
         for i ,exploredCell in enumerate(path):
-            
-            if showHistory == False:
-                prevCell = path[i-1]
-                if prevCell != None:
-                    self.maze[prevCell[0]][prevCell[1]] = 1 
-                    matrix = np.array(self.maze)
-
-            matrix[exploredCell[0]][exploredCell[1]] = 4
+            matrix = np.array(self.maze)
+            r, c = exploredCell
+            if self.maze[r][c] not in (0,3):
+                matrix[r][c] = 4
             im.set_data(matrix)
             plt.draw()
-            plt.pause(0.5)
+            plt.pause(0.1)
 
         plt.ioff()
         plt.show()
