@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import colors
 import os
-from colored import Fore, Back, Style
 import time
 
 class Maze():
