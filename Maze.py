@@ -3,11 +3,12 @@ import numpy as np
 class Maze():
 
     def __init__(self,filename):
-        self.maze = self.load(filename)
         self.wallCell =[]
         self.freeCell = []
         self.start = None
         self.goal = None
+        self.maze = self.load(filename)
+
 
     def load(self,filename):
 
@@ -31,4 +32,3 @@ class Maze():
         return np.array(maze)
     
 myMaze = Maze("maze.txt")
-print(myMaze.maze)
