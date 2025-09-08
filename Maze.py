@@ -52,7 +52,7 @@ class Maze():
     
     def updateMatrix(self,matrix):
         """ This a helper function to update the values of the matrix"""
-        
+        pass
          
     
     def display(self,path):
