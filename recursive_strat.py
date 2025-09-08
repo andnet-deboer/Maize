@@ -36,6 +36,6 @@ maze = maze_manual.Maze("datafile.txt")
 if solve_maze(maze_obj.maze, maze_obj.start[0],maze_obj.start[1], path, history):
     #print("Path:", path)
     #print ("History:", history)
-    maze.display(history,False)
+    maze.display(history,True)
 else:
     print("No path found")

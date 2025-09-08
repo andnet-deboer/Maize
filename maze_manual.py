@@ -64,6 +64,7 @@ class Maze():
         plt.draw()
 
         for i ,exploredCell in enumerate(path):
+            
             if showHistory == False:
                 prevCell = path[i-1]
                 if prevCell != None:
