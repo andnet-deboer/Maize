@@ -42,7 +42,8 @@ class Maze():
         pass
          
     
-    def display(self, path):
+    def display(self, path,showHistory):
+        os.system('clear')
 
         matrix = np.array(self.maze)
 
@@ -64,10 +65,11 @@ class Maze():
         plt.draw()
 
         for i ,exploredCell in enumerate(path):
-            prevCell = path[i-1]
-            if prevCell != None:
-                self.maze[prevCell[0]][prevCell[1]] = 1 
-                matrix = np.array(self.maze)
+            if showHistory == False:
+                prevCell = path[i-1]
+                if prevCell != None:
+                    self.maze[prevCell[0]][prevCell[1]] = 1 
+                    matrix = np.array(self.maze)
 
             matrix[exploredCell[0]][exploredCell[1]] = 4
             im.set_data(matrix)

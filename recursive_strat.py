@@ -21,6 +21,7 @@ def solve_maze(maze, r, c, path, history):
         return True
 
     history.append(path.pop())
+    history.append(path[-1])
     return False
 
 maze_obj = maze_manual.Maze("maze.txt")
@@ -35,6 +36,6 @@ maze = maze_manual.Maze("maze.txt")
 if solve_maze(maze_obj.maze, 0, 0, path, history):
     #print("Path:", path)
     #print ("History:", history)
-    maze.display(history)
+    maze.display(history,False)
 else:
     print("No path found")
