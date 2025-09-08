@@ -1,6 +1,9 @@
 import numpy as np
-import matplotlib as plt
-#from colored import Fore, Back, Style
+import matplotlib.pyplot as plt
+from matplotlib import colors
+import os
+from colored import Fore, Back, Style
+import time
 
 class Maze():
 
@@ -29,10 +32,49 @@ class Maze():
                 elif cell == 2:
                     self.wallCell.append((i,j))
                 elif cell == 3:
-                    self.goal = (i,j)
-        
+                    self.goal = (i,j)  
         return maze    
-    def display(self,path):
+    
+ 
+    
+    def updateMatrix(self,matrix):
+        """ This a helper function to update the values of the matrix"""
         pass
+         
+    
+    def display(self, path):
+        os.system('clear')
+
+        matrix = np.array(self.maze)
+
+        cmap = colors.ListedColormap(['green', 'gray', 'black', 'red', 'yellow'])
+        norm = colors.BoundaryNorm([0, 1, 2, 3, 4], cmap.N)
+
+        fig, ax = plt.subplots()
+        im = ax.imshow(matrix, cmap=cmap, norm=norm)
+
+        ax.set_xticks(np.arange(-0.5, len(self.maze[0]), 1))
+        ax.set_yticks(np.arange(-0.5, len(self.maze), 1))
+        ax.grid(which='major', linestyle='-', color='k', linewidth=1)
+        ax.set_xticklabels([])
+        ax.set_yticklabels([])
+        ax.set_title("ROBOT MAIZE")
+
+        plt.ion()
+        plt.show()
+        plt.draw()
+
+        for exploredCell in path:
+            matrix[exploredCell[0]][exploredCell[1]] = 4
+            im.set_data(matrix)
+            plt.draw()
+            plt.pause(0.5)
+
+        plt.ioff()
+        plt.show()
+
+
+maze = Maze("maze.txt")
+maze.display([(0, 0), (0, 1), (0, 2), (1, 2), (2, 2), (3, 2), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (3, 8), (2, 8), (2, 9), (3, 9), (4, 9)])
         
         

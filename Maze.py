@@ -35,53 +35,46 @@ class Maze():
                     self.goal = (i,j)  
         return maze    
     
-    def color(self, value):
-        color = None
-        match value:
-             case 0:
-                color = f'{Fore.green}'
-             case 1:
-                color = f'{Fore.white}'
-             case 2:
-                color = f'{Fore.black}'
-             case 3:
-                color = f'{Fore.red}'
-             case -1:
-                color = f'{Fore.yellow}'
-        return color
+ 
     
     def updateMatrix(self,matrix):
         """ This a helper function to update the values of the matrix"""
         pass
          
     
-    def display(self,path):
+    def display(self, path):
         os.system('clear')
-        
-        matrix = self.maze
-        ########### Direct citation (3)  ########
-        cmap = colors.ListedColormap(['yellow','green','gray','black','white','red',])
+
+        matrix = np.array(self.maze)
+
+        cmap = colors.ListedColormap(['green', 'gray', 'black', 'red', 'yellow'])
+        norm = colors.BoundaryNorm([0, 1, 2, 3, 4], cmap.N)
+
         fig, ax = plt.subplots()
-        norm = colors.BoundaryNorm([-1, 0, 1, 2, 3, 4,], cmap.N)
-        
+        im = ax.imshow(matrix, cmap=cmap, norm=norm)
+
+        ax.set_xticks(np.arange(-0.5, len(self.maze[0]), 1))
+        ax.set_yticks(np.arange(-0.5, len(self.maze), 1))
+        ax.grid(which='major', linestyle='-', color='k', linewidth=1)
+        ax.set_xticklabels([])
+        ax.set_yticklabels([])
+        ax.set_title("ROBOT MAIZE")
+
+        plt.ion()
+        plt.show()
+        plt.draw()
+
         for exploredCell in path:
-            self.maze[exploredCell[0]][exploredCell[1]] = -1
+            matrix[exploredCell[0]][exploredCell[1]] = 4
+            im.set_data(matrix)
+            plt.draw()
+            plt.pause(0.5)
 
-            ax.imshow(matrix, cmap=cmap, norm=colors.BoundaryNorm([-1, 0, 1, 2, 3, 4], cmap.N))
-
-            # draw gridlines
-            ax.set_xticks(np.arange(-0.5, len(self.maze[0]), 1))
-            ax.set_yticks(np.arange(-0.5, len(self.maze), 1))
-            ax.grid(which='major', linestyle='-', color='k', linewidth=1)
-            ax.set_xticklabels([])
-            ax.set_yticklabels([])
-            ax.set_title("ROBOT MAIZE")
-            time.sleep(1)
-            plt.show()
-   
+        plt.ioff()
+        plt.show()
 
 
 maze = Maze("maze.txt")
-maze.display([(0,0),(0,1),(0,2)])
+maze.display([(0, 0), (0, 1), (0, 2), (1, 2), (2, 2), (3, 2), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (3, 8), (2, 8), (2, 9), (3, 9), (4, 9)])
         
         
