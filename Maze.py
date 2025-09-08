@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class Maze():
 
     def __init__(self,filename):
@@ -9,7 +8,6 @@ class Maze():
         self.freeCell = []
         self.start = None
         self.goal = None
-
 
     def load(self,filename):
 
@@ -22,3 +20,6 @@ class Maze():
             maze.append(row)
         
         return np.array(maze)
+    
+myMaze = Maze("maze.txt")
+print(myMaze.maze)
