@@ -27,6 +27,7 @@ print(f"Maze: {maze_obj.maze}")
 
 
 path = []
+
 if solve_maze(maze_obj.maze, 0, 0, path):
     print("Path:", path)
 else:
