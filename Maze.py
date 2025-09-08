@@ -36,7 +36,3 @@ class Maze():
         pass
         
         
-
-    
-myMaze = Maze("maze.txt")
-print(myMaze.maze)
