@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib as plt
-#from colored import Fore, Back, Style
+import os
+from colored import Fore, Back, Style
 
 class Maze():
 
@@ -29,10 +30,26 @@ class Maze():
                 elif cell == 2:
                     self.wallCell.append((i,j))
                 elif cell == 3:
-                    self.goal = (i,j)
-        
+                    self.goal = (i,j)  
         return maze    
+    
     def display(self,path):
-        pass
+        os.system('clear')
+        for cell in self.maze:
+            if cell == 0:
+                    Fore.red
+                    print(cell)
+            elif cell == 1:
+                    Fore.blue
+                    print(cell)
+            elif cell == 2:
+                    Fore.black
+                    print(cell)
+            elif cell == 3:
+                    Fore.green
+                    print(cell)
+
+maze = Maze("maze.txt")
+maze.display((0,0),(0,1))
         
         
