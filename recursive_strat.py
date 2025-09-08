@@ -24,16 +24,16 @@ def solve_maze(maze, r, c, path, history):
     history.append(path[-1])
     return False
 
-maze_obj = maze_manual.Maze("maze.txt")
+maze_obj = maze_manual.Maze("datafile.txt")
 print(f"Maze: {maze_obj.maze}")
 #maze_obj = [[0, 1, 1, 1, 2], [2, 2, 1, 2, 2], [2, 2, 1, 1, 3]]
 
 path = []
 history = []
 
-maze = maze_manual.Maze("maze.txt")
+maze = maze_manual.Maze("datafile.txt")
 
-if solve_maze(maze_obj.maze, 0, 0, path, history):
+if solve_maze(maze_obj.maze, maze_obj.start[0],maze_obj.start[1], path, history):
     #print("Path:", path)
     #print ("History:", history)
     maze.display(history,False)
