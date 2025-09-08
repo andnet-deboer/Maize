@@ -15,9 +15,18 @@ class Maze():
             lines = f.readlines()
         maze = []
 
-        for line in lines:
+        for i,line in enumerate(lines):
             row = list(map(int,line.strip().split()))
             maze.append(row)
+            for j, cell in enumerate(row):
+                if cell == 0:
+                    self.start = (i,j)
+                elif cell == 1:
+                    self.freeCell.append((i,j))
+                elif cell == 2:
+                    self.wallCell.append((i,j))
+                elif cell == 3:
+                    self.goal = (i,j)
         
         return np.array(maze)
     
