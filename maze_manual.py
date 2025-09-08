@@ -43,7 +43,6 @@ class Maze():
          
     
     def display(self, path):
-        os.system('clear')
 
         matrix = np.array(self.maze)
 
@@ -64,7 +63,12 @@ class Maze():
         plt.show()
         plt.draw()
 
-        for exploredCell in path:
+        for i ,exploredCell in enumerate(path):
+            prevCell = path[i-1]
+            if prevCell != None:
+                self.maze[prevCell[0]][prevCell[1]] = 1 
+                matrix = np.array(self.maze)
+
             matrix[exploredCell[0]][exploredCell[1]] = 4
             im.set_data(matrix)
             plt.draw()
@@ -75,6 +79,5 @@ class Maze():
 
 
 maze = Maze("maze.txt")
-maze.display([(0, 0), (0, 1), (0, 2), (1, 2), (2, 2), (3, 2), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (3, 8), (2, 8), (2, 9), (3, 9), (4, 9)])
-        
+#maze.display([(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 8), (1, 7), (1, 7), (0, 7), (0, 6), (0, 5), (0, 4), (0, 3), (1, 2), (2, 2), (3, 2), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (3, 8), (2, 8), (2, 9), (1, 9), (1, 9), (3, 9), (4, 9)])        
         

@@ -1,5 +1,5 @@
 import maze_manual
-def solve_maze(maze, r, c, path):
+def solve_maze(maze, r, c, path, history):
     if r < 0 or r >= len(maze) or c < 0 or c >= len(maze[0]):
         return False
 
@@ -7,28 +7,34 @@ def solve_maze(maze, r, c, path):
         return False
 
     path.append((r, c))
+    history.append((r, c))
 
     if maze[r][c] == 3:
-        return True
+            return True
 
     maze[r][c] = -1
 
-    if (solve_maze(maze, r-1, c, path) or # up
-        solve_maze(maze, r, c+1, path) or # right
-        solve_maze(maze, r+1, c, path) or # down
-        solve_maze(maze, r, c-1, path)): # left
+    if (solve_maze(maze, r-1, c, path, history) or # up
+        solve_maze(maze, r, c+1, path, history) or # right
+        solve_maze(maze, r+1, c, path, history) or # down
+        solve_maze(maze, r, c-1, path, history)): # left
         return True
 
-    path.pop()
+    history.append(path.pop())
     return False
 
 maze_obj = maze_manual.Maze("maze.txt")
-#print(f"Maze: {maze_obj.maze}")
-
+print(f"Maze: {maze_obj.maze}")
+#maze_obj = [[0, 1, 1, 1, 2], [2, 2, 1, 2, 2], [2, 2, 1, 1, 3]]
 
 path = []
+history = []
 
-if solve_maze(maze_obj.maze, 0, 0, path):
-    print("Path:", path)
+maze = maze_manual.Maze("maze.txt")
+
+if solve_maze(maze_obj.maze, 0, 0, path, history):
+    #print("Path:", path)
+    #print ("History:", history)
+    maze.display(history)
 else:
     print("No path found")
