@@ -30,12 +30,12 @@ def solve_maze(maze, r, c, path, history):
     history.append(path[-1])
     return False
 
-maze_obj = maze_manual.Maze("datafile.txt")
+maze_obj = maze_manual.Maze("MazeFiles/datafile.txt")
 
 path = []
 history = []
 
-maze = maze_manual.Maze("datafile.txt")
+maze = maze_manual.Maze("MazeFiles/datafile.txt")
 
 if solve_maze(maze_obj.maze, maze_obj.start[0],maze_obj.start[1], path, history):
     maze.display(history,False)
