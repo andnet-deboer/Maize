@@ -6,7 +6,7 @@ The following files are needed to run the maze:
 maze_manual.py
 recursive_strat.py
 
-*To run the program type python3 recursive_strat.py in the terminal.
+*To run the program type python3 main.py in the terminal.
 
 The following files are needed to create the maze: 
 cell.py
