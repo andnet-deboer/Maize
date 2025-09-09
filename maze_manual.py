@@ -42,19 +42,13 @@ class Maze():
         matrix = np.array(self.maze)  
 
         #Create a set of colors to display on map
-        #Create a set of colors to display on map
         cmap = colors.ListedColormap(['green', 'gray', 'black', 'red', 'yellow'])
         norm = colors.BoundaryNorm([0, 1, 2, 3, 4, 5], cmap.N)
 
         #show image with color map and then retrive the current axis
         im = plt.imshow(matrix, cmap=cmap, norm=norm) 
         ax = plt.gca() 
-        #show image with color map and then retrive the current axis
-        im = plt.imshow(matrix, cmap=cmap, norm=norm) 
-        ax = plt.gca() 
         ax.set_title("ROBOT MAIZE")
-        
-        #draw plot
         
         #draw plot
         plt.draw()
@@ -64,15 +58,10 @@ class Maze():
             matrix = np.array(self.maze)
             r, c = exploredCell
             #Color visited paths
-            #Color visited paths
             if self.maze[r][c] not in (0,3):
                 matrix[r][c] = 4 
             #update matrix
-                matrix[r][c] = 4 
-            #update matrix
             im.set_data(matrix)
-
-            #redraw plot
 
             #redraw plot
             plt.draw()
