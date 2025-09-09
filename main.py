@@ -3,9 +3,12 @@ from maze_manual import Maze
 
 import recursive_strat
 import maze_manual
+import os
 
 
 def main():
+
+    
     maze_obj = maze_manual.Maze("MazeFiles/data50x50.txt")
 
     path = []

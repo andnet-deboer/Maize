@@ -16,9 +16,9 @@ def write_maze(maze):
     #Write the output of the maze generation to a file
     rows = len(maze)
     columns = len(maze[0])
-
+    filename = input("Enter the name for your maze: ") +".txt"
     #open a file: 
-    with open('data50x50.txt', 'w') as f:
+    with open(f'MazeFiles/{filename}', 'w') as f:
         for r in range(rows):
             for c in range(columns):
                 f.write(maze[r][c].__repr__())
