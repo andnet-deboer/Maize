@@ -11,6 +11,8 @@ class Maze():
         self.start = None
         self.goal = None
         self.maze = self.load(filename)
+        self.path = []
+        self.history = []
 
 
     def load(self,filename):
@@ -65,3 +67,34 @@ class Maze():
             #redraw plot
             plt.draw()
             plt.pause(0.1)
+
+    def solve_maze(self):
+        r,c = self.start
+        #Check boundaries:
+        if r < 0 or r >= len(self.maze) or c < 0 or c >= len(self.maze[0]):
+            return False
+
+        #Check for walls and visited cells
+        if self.maze[r][c] == 2 or self.maze[r][c] == -1:
+            return False
+
+        self.path.append((r, c))
+        self.history.append((r, c))
+
+        #Check for goal
+        if self.maze[r][c] == 3:
+                return True
+
+        #Mark as visited
+        self.maze[r][c] = -1
+
+        #Explore neighbors
+        if (self.solve_maze(self.maze, r-1, c, self.path, self.history) or # up
+            self.solve_maze(self.maze, r, c+1, self.path, self.history) or # right
+            self.solve_maze(self.maze, r+1, c, self.path, self.history) or # down
+            self.solve_maze(self.maze, r, c-1, self.path, self.history)): # left
+            return True
+
+        self.history.append(self.path.pop())
+        self.history.append(self.path[-1])
+        return False
