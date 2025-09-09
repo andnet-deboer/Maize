@@ -1,20 +1,20 @@
 
-from maze_manual import Maze
+import maize 
 
 import recursive_strat
-import maze_manual
+import maize
 import os
 
 
 def main():
 
     
-    maze_obj = maze_manual.Maze("MazeFiles/data50x50.txt")
+    maze_obj =  maize.Maze("MazeFiles/data50x50.txt")
 
     path = []
     history = []
 
-    maze = maze_manual.Maze("MazeFiles/data50x50.txt")
+    maze = maize.Maze("MazeFiles/data50x50.txt")
 
     hist = int(input("\nEnter 0 for final path enter 1 to visualize full exploration: "))
 

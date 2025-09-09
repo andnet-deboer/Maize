@@ -1,4 +1,4 @@
-import maze_manual
+import maize
 
 def solve_maze(maze, r, c, path, history):
 
