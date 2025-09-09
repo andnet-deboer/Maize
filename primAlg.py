@@ -13,7 +13,7 @@ def print_maze(maze):
         print("\n")
 
 def write_maze(maze):
-    #Determine the size of the maze:
+    #Write the output of the maze generation to a file
     rows = len(maze)
     columns = len(maze[0])
 
@@ -26,39 +26,31 @@ def write_maze(maze):
             print("\n")
             f.write("\n")
 
-def print_maze_num(maze):
-    #Determine the size of the maze:
-    rows = len(maze)
-    columns = len(maze[0])
-
-    for r in range(rows):
-        for c in range(columns):
-            print(f"{maze[r][c].state} ", end = "")
-        print("\n")
-
 def index_exists(matrix, row, col):
+    #Will return True if the index exists in the matriz, and false otherwise. 
     return (
         0 <= row < len(matrix) and
         0 <= col < len(matrix[row])
     )
 
 def adj_one(matrix, test):
+    #Will determine how many cells have a free wall adjacent, and if it is 1, then it will return that cell.
     rows = len(matrix)
     cols = len(matrix[0])
     numFree = 0
     oneFree = None
 
     #Determine how many are adjactent to the test Cell:
-    if(0 <= test.row - 1 < rows and matrix[test.row - 1][test.col].state >= 1):  # Up
+    if(0 <= test.row - 1 < rows and matrix[test.row - 1][test.col].state >= 1):  #Up
         numFree += 1
         oneFree = matrix[test.row - 1][test.col]
-    if(0 <= test.row + 1 < rows and matrix[test.row + 1][test.col].state >= 1):  # Dowm
+    if(0 <= test.row + 1 < rows and matrix[test.row + 1][test.col].state >= 1):  #Down
         numFree += 1
         oneFree = matrix[test.row + 1][test.col]
-    if(0 <= test.col - 1 < cols and matrix[test.row][test.col - 1].state >= 1):  # Left
+    if(0 <= test.col - 1 < cols and matrix[test.row][test.col - 1].state >= 1):  #Left
         numFree += 1
         oneFree = matrix[test.row][test.col - 1]
-    if(0 <= test.col + 1 < cols and matrix[test.row][test.col + 1].state >= 1):  # Right
+    if(0 <= test.col + 1 < cols and matrix[test.row][test.col + 1].state >= 1):  #Right
         numFree += 1
         oneFree = matrix[test.row][test.col + 1]
 
@@ -68,21 +60,23 @@ def adj_one(matrix, test):
         return None
 
 def dir_W(matrix,W,F):
+    #This function determines the direction of W to F:
     rows = len(matrix)
     cols = len(matrix[0])
     DIR = 0         #0-North, 1-South, 2-East, 3-West
 
-    if(index_exists(matrix, W.row -1, W.col) and matrix[W.row - 1][W.col] == F):  # Up
+    if(index_exists(matrix, W.row -1, W.col) and matrix[W.row - 1][W.col] == F):  #Up
         DIR = 1 #South
-    if(index_exists(matrix, W.row + 1, W.col) and matrix[W.row + 1][W.col] == F):  # Dowm
+    if(index_exists(matrix, W.row + 1, W.col) and matrix[W.row + 1][W.col] == F):  #Down
         DIR = 0 #North
-    if(index_exists(matrix, W.row, W.col - 1) and matrix[W.row][W.col - 1] == F):  # Left
+    if(index_exists(matrix, W.row, W.col - 1) and matrix[W.row][W.col - 1] == F):  #Left
         DIR = 3 #West
-    if(index_exists(matrix, W.row, W.col + 1) and matrix[W.row][W.col + 1] == F):  # Right
+    if(index_exists(matrix, W.row, W.col + 1) and matrix[W.row][W.col + 1] == F):  #Right
         DIR = 2 #East
     return DIR
 
 def ret_A(matrix,W,DIR):    
+    #The is will return the cell in the DIR of W:
     rows = len(matrix)
     cols = len(matrix[0])
     A = None
@@ -98,6 +92,7 @@ def ret_A(matrix,W,DIR):
     return A
 
 def add_walls(matrix, walls, freeCell):
+    #This function adds the adjacent walls to the wall list based on index position:
     #Find the index of the freeCell in the matrix: 
     id_row = 0
     id_col = 0
@@ -108,27 +103,27 @@ def add_walls(matrix, walls, freeCell):
                 id_col = j
 
     #Check to see if the neighbors exist:
-    if index_exists(matrix, id_row - 1, id_col):  # Up
+    if index_exists(matrix, id_row - 1, id_col):  #Up
         walls.append(matrix[id_row - 1][id_col])
-    if index_exists(matrix, id_row + 1, id_col):  # Down
+    if index_exists(matrix, id_row + 1, id_col):  #Down
         walls.append(matrix[id_row + 1][id_col])
-    if index_exists(matrix, id_row, id_col - 1):  # Left
+    if index_exists(matrix, id_row, id_col - 1):  #Left
         walls.append(matrix[id_row][id_col - 1])
-    if index_exists(matrix, id_row, id_col + 1):  # Right
+    if index_exists(matrix, id_row, id_col + 1):  #Right
         walls.append(matrix[id_row][id_col + 1])
     return walls
 
 
 def prim_alg():
+    #Start the Algorithm Generation:
     print("We will determine what size rectangular maze would you like to create (M x N): ")
     M = int(input("Please input the horizontal dimension:"))
     N = int(input("Please input the vertical dimension:"))
     
     #Create Cells for each row in the matrix:
-    maze = [[Cell(row, col) for col in range(M)] for row in range(N)]
+    maze = [[Cell(row, col) for col in range(M)] for row in range(N)]   #Generates a matriz (maze) where each Cell has an index position (row,col)
 
     #Implement the Prim Algorithm:
-    
     #Randomly choose and X and Y position:
     rand_row = random.randint(0, M-1)   #Generates a random integer between 0 and M-1
     rand_col = random.randint(0,N-1)    #Generates a random integer between 0 and N-1

@@ -9,7 +9,7 @@ class Cell:
         self.row = row
         self.col = col
     
-    def __repr__(self):
+    def __repr__(self): #This will return the text representation of the cell when printed or calling __repr__
         if(self.state == 0):
             return "2 "
         elif(self.state == 1):
