@@ -6,12 +6,12 @@ import maze_manual
 
 
 def main():
-    maze_obj = maze_manual.Maze("MazeFiles/datafile.txt")
+    maze_obj = maze_manual.Maze("MazeFiles/data50x50.txt")
 
     path = []
     history = []
 
-    maze = maze_manual.Maze("MazeFiles/datafile.txt")
+    maze = maze_manual.Maze("MazeFiles/data50x50txt")
 
     if recursive_strat.solve_maze(maze_obj.maze, maze_obj.start[0],maze_obj.start[1], path, history):
         maze.display(path)
