@@ -11,7 +11,7 @@ def main():
     path = []
     history = []
 
-    maze = maze_manual.Maze("MazeFiles/data50x50txt")
+    maze = maze_manual.Maze("MazeFiles/data50x50.txt")
 
     if recursive_strat.solve_maze(maze_obj.maze, maze_obj.start[0],maze_obj.start[1], path, history):
         maze.display(path)
