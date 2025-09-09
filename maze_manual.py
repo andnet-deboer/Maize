@@ -35,13 +35,13 @@ class Maze():
                     self.wallCell.append((i,j))
                 elif cell == 3:
                     self.goal = (i,j)  
-        return maze    
-         
+        return maze        
     
     def display(self, path):
         """ This is a function to display the """
         matrix = np.array(self.maze)  
 
+        #Create a set of colors to display on map
         #Create a set of colors to display on map
         cmap = colors.ListedColormap(['green', 'gray', 'black', 'red', 'yellow'])
         norm = colors.BoundaryNorm([0, 1, 2, 3, 4, 5], cmap.N)
@@ -49,52 +49,34 @@ class Maze():
         #show image with color map and then retrive the current axis
         im = plt.imshow(matrix, cmap=cmap, norm=norm) 
         ax = plt.gca() 
+        #show image with color map and then retrive the current axis
+        im = plt.imshow(matrix, cmap=cmap, norm=norm) 
+        ax = plt.gca() 
         ax.set_title("ROBOT MAIZE")
+        
+        #draw plot
         
         #draw plot
         plt.draw()
    
         # For explored cells go back and hide cell colors to match free cell color
         for exploredCell in path:
+   
+        # For explored cells go back and hide cell colors to match free cell color
+        for exploredCell in path:
             matrix = np.array(self.maze)
             r, c = exploredCell
             #Color visited paths
+            #Color visited paths
             if self.maze[r][c] not in (0,3):
+                matrix[r][c] = 4 
+            #update matrix
                 matrix[r][c] = 4 
             #update matrix
             im.set_data(matrix)
 
             #redraw plot
+
+            #redraw plot
             plt.draw()
             plt.pause(0.1)
-
-    def solve_maze(self):
-        r,c = self.start
-        #Check boundaries:
-        if r < 0 or r >= len(self.maze) or c < 0 or c >= len(self.maze[0]):
-            return False
-
-        #Check for walls and visited cells
-        if self.maze[r][c] == 2 or self.maze[r][c] == -1:
-            return False
-
-        self.path.append((r, c))
-        self.history.append((r, c))
-
-        #Check for goal
-        if self.maze[r][c] == 3:
-                return True
-
-        #Mark as visited
-        self.maze[r][c] = -1
-
-        #Explore neighbors
-        if (self.solve_maze(self.maze, r-1, c, self.path, self.history) or # up
-            self.solve_maze(self.maze, r, c+1, self.path, self.history) or # right
-            self.solve_maze(self.maze, r+1, c, self.path, self.history) or # down
-            self.solve_maze(self.maze, r, c-1, self.path, self.history)): # left
-            return True
-
-        self.history.append(self.path.pop())
-        self.history.append(self.path[-1])
-        return False
