@@ -61,9 +61,6 @@ class Maze():
    
         # For explored cells go back and hide cell colors to match free cell color
         for exploredCell in path:
-   
-        # For explored cells go back and hide cell colors to match free cell color
-        for exploredCell in path:
             matrix = np.array(self.maze)
             r, c = exploredCell
             #Color visited paths

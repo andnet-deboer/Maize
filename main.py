@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 from maze_manual import Maze
-=======
+
 import recursive_strat
 import maze_manual
 
@@ -21,4 +21,3 @@ def main():
 
 if __name__ == '__main__':
     main()
->>>>>>> 0ed2cb0 (added main)
