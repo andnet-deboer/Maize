@@ -1,10 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import colors
-import os
-import time
 
 class Maze():
+    """ This defines a maze grid which has a start cell, wall cells, free cells, and an end goal"""
 
     def __init__(self,filename):
         self.wallCell =[]
@@ -15,14 +14,16 @@ class Maze():
 
 
     def load(self,filename):
-
+        #open file and feed data into lines
         with open(filename, 'r') as f:
             lines = f.readlines()
+        
         maze = []
-
+        #for each line clear spaces and split into array and build maze
         for i,line in enumerate(lines):
             row = list(map(int,line.strip().split()))
             maze.append(row)
+            #update maze fields: start, freeCell array, wallCellarray, goal
             for j, cell in enumerate(row):
                 if cell == 0:
                     self.start = (i,j)
@@ -33,49 +34,34 @@ class Maze():
                 elif cell == 3:
                     self.goal = (i,j)  
         return maze    
-    
- 
-    
-    def updateMatrix(self,matrix):
-        """ This a helper function to update the values of the matrix"""
-        pass
          
     
-    def display(self, path,showHistory):
-        #os.system('clear')
+    def display(self, path):
+        """ This is a function to display the """
+        matrix = np.array(self.maze)  
 
-        matrix = np.array(self.maze)
-
+        #Create a set of colors to display on map
         cmap = colors.ListedColormap(['green', 'gray', 'black', 'red', 'yellow'])
         norm = colors.BoundaryNorm([0, 1, 2, 3, 4, 5], cmap.N)
 
-        _, ax = plt.subplots()
-        im = ax.imshow(matrix, cmap=cmap, norm=norm)
-
-        ax.set_xticks(np.arange(-0.5, len(self.maze[0]), 1))
-        ax.set_yticks(np.arange(-0.5, len(self.maze), 1))
-        ax.grid(which='major', linestyle='-', color='k', linewidth=1)
-        ax.set_xticklabels([])
-        ax.set_yticklabels([])
+        #show image with color map and then retrive the current axis
+        im = plt.imshow(matrix, cmap=cmap, norm=norm) 
+        ax = plt.gca() 
         ax.set_title("ROBOT MAIZE")
-
-        plt.ion()
-        #plt.show()
+        
+        #draw plot
         plt.draw()
-
-        for i ,exploredCell in enumerate(path):
+   
+        # For explored cells go back and hide cell colors to match free cell color
+        for exploredCell in path:
             matrix = np.array(self.maze)
             r, c = exploredCell
+            #Color visited paths
             if self.maze[r][c] not in (0,3):
-                matrix[r][c] = 4
+                matrix[r][c] = 4 
+            #update matrix
             im.set_data(matrix)
+
+            #redraw plot
             plt.draw()
             plt.pause(0.1)
-
-        plt.ioff()
-        plt.show()
-
-
-maze = Maze("maze.txt")
-#maze.display([(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 8), (1, 7), (1, 7), (0, 7), (0, 6), (0, 5), (0, 4), (0, 3), (1, 2), (2, 2), (3, 2), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (3, 8), (2, 8), (2, 9), (1, 9), (1, 9), (3, 9), (4, 9)])        
-        
